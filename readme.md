@@ -1,14 +1,17 @@
-SAP Business One Service Layer Connector (C#)
+# 🔗 SAP Business One Service Layer Connector (C#)
 
-Este proyecto muestra cómo conectarse a SAP Business One Service Layer desde una aplicación en C#, usando RestSharp para consumir servicios REST y log4net para manejo de logs.
+Este repositorio contiene un conector básico en C# para interactuar con **SAP Business One Service Layer**.  
+La idea es tener una base limpia para realizar peticiones **GET** y **POST**, junto con un esquema seguro para manejar credenciales.
 
-El objetivo es proporcionar un ejemplo simple, modular y documentado, que pueda servir como base para integraciones más complejas.
+---
 
-📂 Estructura del proyecto
+## 📂 Estructura del proyecto
+
+```
 sapb1-connection-basic/
-│── ServiceLayer.config       # Archivo de configuración (credenciales y parámetros de conexión)
+│── ServiceLayer.config # Archivo de configuración (ignorado en Git)
 │── Helpers/
-│   └── Logs.cs                   # Clase de utilidades para manejar log4net
+│ └── Logs.cs # Clase auxiliar para logs
 │── Models/
 │   ├── SBO.cs                    # Entidad de configuración de conexión SAP
 │   ├── B1SLLogin.cs              # Modelo para login en Service Layer
@@ -18,83 +21,65 @@ sapb1-connection-basic/
 │   ├── ServiceLayerEndpoint.cs   # Implementación de las operaciones con SAP
 │   ├── TransactionService.cs     # Clase base para operaciones
 │   └── SessionHandler.cs         # Manejo de sesión/login
-│── Program.cs                    # Clase principal, entry point
-│── README.md                     # Documentación del proyecto
-│── .gitignore                    # Exclusión de archivos sensibles
+│── Program.cs # Punto de entrada del proyecto
+│── README.md # Este archivo
+```
 
-⚙️ Configuración
+---
 
-El archivo ServiceLayer.config contiene los parámetros de conexión.
-Ejemplo:
+## ⚙️ Configuración
 
-<Connections>
-  <SBO>
-    <add key="SAP_SERVIDOR" value="servidor-sap" />
-    <add key="SAP_BASE" value="SBODEMOCL" />
-    <add key="SAP_TIPO_BASE" value="MSSQL2019" />
-    <add key="SAP_DBUSUARIO" value="sa" />
-    <add key="SAP_DBPASSWORD" value="password-db" />
-    <add key="SAP_USUARIO" value="manager" />
-    <add key="SAP_PASSWORD" value="password-sap" />
-    <add key="SL_SCHEME" value="https" />
-    <add key="SL_HOST" value="servidor-sap" />
-    <add key="SL_PORT" value="50000" />
-    <add key="SL_BASEPATH" value="b1s/v1/" />
-  </SBO>
-</Connections>
+El archivo `ServiceLayer.config` (no subido al repo por seguridad) contiene las credenciales y parámetros de conexión:
 
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<ServiceLayerConfig>
+  <BaseURL>https://servidor:50000/b1s/v1/</BaseURL>
+  <CompanyDB>SBODEMOCL</CompanyDB>
+  <UserName>manager</UserName>
+  <Password>password</Password>
+</ServiceLayerConfig>
+```
 
-⚠️ Nota: El archivo ServiceLayer.config debe estar en .gitignore para no exponer credenciales.
+⚠️ Este archivo está en .gitignore para evitar exponer credenciales.
 
 ▶️ Ejecución
 
 Clonar el repositorio:
+```
+git clone https://github.com/tuusuario/sapb1-connection-basic.git
+```
 
-git clone https://github.com/usuario/sapb1-connection-basic.git
-
-
-Configurar ServiceLayer.config con tus credenciales SAP B1.
-
-Compilar y ejecutar:
-
+Restaurar dependencias y compilar:
+```
+dotnet restore
 dotnet build
+```
+
+Ejecutar el proyecto:
+```
 dotnet run
+```
 
-🛠️ Funcionalidades principales
+```
+📑 Ejemplo de uso
+var connector = new ServiceLayerConnector("https://servidor:50000/b1s/v1/");
+var loginResponse = connector.httpPOST("Login", "", new {
+    UserName = "manager",
+    Password = "password",
+    CompanyDB = "SBODEMOCL"
+});
+```
 
-🔑 Login automático al Service Layer y obtención de SessionId.
+🛡️ Notas de seguridad
 
-📡 Métodos genéricos httpGET y httpPOST para consumir recursos de SAP B1.
+Usa archivos de configuración ignorados en Git (.gitignore).
 
-📝 Manejo de logs con log4net (request, response, errores).
+Opcionalmente, utiliza variables de entorno para credenciales en entornos productivos.
 
-⚡ Diseño modular con separación en capas:
+📌 Licencia
 
-Connector → Comunicación HTTP
+Este proyecto está bajo la licencia MIT.
+Puedes usarlo y adaptarlo libremente.
 
-TransactionService → Lógica de sesión y operaciones
-
-Endpoint → Extensiones para GET/POST específicos
-
-📖 Ejemplo de uso
-Obtener lista de artículos
-var service = new ServiceLayerEndpoint();
-var items = service.Get<List<Item>>("Items?$top=5");
-foreach (var item in items)
-{
-    Console.WriteLine($"{item.ItemCode} - {item.ItemName}");
-}
-
-📋 Roadmap (ideas futuras)
-
- Agregar pruebas unitarias con xUnit
-
- Implementar métodos PUT y DELETE
-
- Manejo seguro de credenciales con dotnet user-secrets
-
- Dockerfile para levantar un microservicio de integración
-
-📜 Licencia
-
-Este proyecto se distribuye bajo la licencia MIT.
+---
