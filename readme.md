@@ -32,13 +32,22 @@ sapb1-connection-basic/
 El archivo `ServiceLayer.config` (no subido al repo por seguridad) contiene las credenciales y parámetros de conexión:
 
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ServiceLayerConfig>
-  <BaseURL>https://servidor:50000/b1s/v1/</BaseURL>
-  <CompanyDB>SBODEMOCL</CompanyDB>
-  <UserName>manager</UserName>
-  <Password>password</Password>
-</ServiceLayerConfig>
+<?xml version="1.0" encoding="UTF-8"?>
+<CONEXION>
+	<SBO>
+		<add key="SAP_SERVIDOR" value="servidor" />
+		<add key="SAP_BASE" value="SBODEMOCL" />
+		<add key="SAP_TIPO_BASE" value="SQL19" />
+		<add key="SAP_DBUSUARIO" value="user" />
+		<add key="SAP_DBPASSWORD" value="password" />
+		<add key="SAP_USUARIO" value="manager" />
+		<add key="SAP_PASSWORD" value="passord" />
+		<add key="SL_SCHEME" value="SBODEMOCL" />
+		<add key="SL_HOST" value="servidor" />
+		<add key="SL_PORT" value="50000" />
+		<add key="SL_BASEPATH" value="b1s/v1" />
+	</SBO>
+</CONEXION>
 ```
 
 ⚠️ Este archivo está en .gitignore para evitar exponer credenciales.
