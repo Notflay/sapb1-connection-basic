@@ -1,30 +1,30 @@
 SAP Business One Service Layer Connector (C#)
 
-Este proyecto muestra c�mo conectarse a SAP Business One Service Layer desde una aplicaci�n en C#, usando RestSharp para consumir servicios REST y log4net para manejo de logs.
+Este proyecto muestra cómo conectarse a SAP Business One Service Layer desde una aplicación en C#, usando RestSharp para consumir servicios REST y log4net para manejo de logs.
 
-El objetivo es proporcionar un ejemplo simple, modular y documentado, que pueda servir como base para integraciones m�s complejas.
+El objetivo es proporcionar un ejemplo simple, modular y documentado, que pueda servir como base para integraciones más complejas.
 
-?? Estructura del proyecto
+📂 Estructura del proyecto
 sapb1-connection-basic/
-�-- ServiceLayer.config       	  # Archivo de configuraci�n (credenciales y par�metros de conexi�n)
-�-- Helpers/
-�   +-- Logs.cs                   # Clase de utilidades para manejar log4net
-�-- Models/
-�   +-- SBO.cs                    # Entidad de configuraci�n de conexi�n SAP
-�   +-- B1SLLogin.cs              # Modelo para login en Service Layer
-�   +-- B1SLLoginResponse.cs      # Modelo para respuesta de login
-�-- Services/
-�   +-- ServiceLayerConnector.cs  # Conector HTTP (GET/POST con RestSharp)
-�   +-- ServiceLayerEndpoint.cs   # Implementaci�n de las operaciones con SAP
-�   +-- TransactionService.cs     # Clase base para operaciones
-�   +-- SessionHandler.cs         # Manejo de sesi�n/login
-�-- Program.cs                    # Clase principal, entry point
-�-- README.md                     # Documentaci�n del proyecto
-�-- .gitignore                    # Exclusi�n de archivos sensibles
+│── ServiceLayer.config       # Archivo de configuración (credenciales y parámetros de conexión)
+│── Helpers/
+│   └── Logs.cs                   # Clase de utilidades para manejar log4net
+│── Models/
+│   ├── SBO.cs                    # Entidad de configuración de conexión SAP
+│   ├── B1SLLogin.cs              # Modelo para login en Service Layer
+│   └── B1SLLoginResponse.cs      # Modelo para respuesta de login
+│── Services/
+│   ├── ServiceLayerConnector.cs  # Conector HTTP (GET/POST con RestSharp)
+│   ├── ServiceLayerEndpoint.cs   # Implementación de las operaciones con SAP
+│   ├── TransactionService.cs     # Clase base para operaciones
+│   └── SessionHandler.cs         # Manejo de sesión/login
+│── Program.cs                    # Clase principal, entry point
+│── README.md                     # Documentación del proyecto
+│── .gitignore                    # Exclusión de archivos sensibles
 
-?? Configuraci�n
+⚙️ Configuración
 
-El archivo ServiceLayer.config contiene los par�metros de conexi�n.
+El archivo ServiceLayer.config contiene los parámetros de conexión.
 Ejemplo:
 
 <Connections>
@@ -44,9 +44,9 @@ Ejemplo:
 </Connections>
 
 
-?? Nota: El archivo ServiceLayer.config debe estar en .gitignore para no exponer credenciales.
+⚠️ Nota: El archivo ServiceLayer.config debe estar en .gitignore para no exponer credenciales.
 
-?? Ejecuci�n
+▶️ Ejecución
 
 Clonar el repositorio:
 
@@ -60,24 +60,24 @@ Compilar y ejecutar:
 dotnet build
 dotnet run
 
-??? Funcionalidades principales
+🛠️ Funcionalidades principales
 
-?? Login autom�tico al Service Layer y obtenci�n de SessionId.
+🔑 Login automático al Service Layer y obtención de SessionId.
 
-?? M�todos gen�ricos httpGET y httpPOST para consumir recursos de SAP B1.
+📡 Métodos genéricos httpGET y httpPOST para consumir recursos de SAP B1.
 
-?? Manejo de logs con log4net (request, response, errores).
+📝 Manejo de logs con log4net (request, response, errores).
 
-? Dise�o modular con separaci�n en capas:
+⚡ Diseño modular con separación en capas:
 
-Connector ? Comunicaci�n HTTP
+Connector → Comunicación HTTP
 
-TransactionService ? L�gica de sesi�n y operaciones
+TransactionService → Lógica de sesión y operaciones
 
-Endpoint ? Extensiones para GET/POST espec�ficos
+Endpoint → Extensiones para GET/POST específicos
 
-?? Ejemplo de uso
-Obtener lista de art�culos
+📖 Ejemplo de uso
+Obtener lista de artículos
 var service = new ServiceLayerEndpoint();
 var items = service.Get<List<Item>>("Items?$top=5");
 foreach (var item in items)
@@ -85,16 +85,16 @@ foreach (var item in items)
     Console.WriteLine($"{item.ItemCode} - {item.ItemName}");
 }
 
-?? Roadmap (ideas futuras)
+📋 Roadmap (ideas futuras)
 
  Agregar pruebas unitarias con xUnit
 
- Implementar m�todos PUT y DELETE
+ Implementar métodos PUT y DELETE
 
  Manejo seguro de credenciales con dotnet user-secrets
 
- Dockerfile para levantar un microservicio de integraci�n
+ Dockerfile para levantar un microservicio de integración
 
-?? Licencia
+📜 Licencia
 
 Este proyecto se distribuye bajo la licencia MIT.
