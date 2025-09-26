@@ -56,7 +56,7 @@ El archivo `ServiceLayer.config` (no subido al repo por seguridad) contiene las 
 
 Clonar el repositorio:
 ```
-git clone https://github.com/tuusuario/sapb1-connection-basic.git
+git clone https://github.com/Notflay/sapb1-connection-basic.git
 ```
 
 Restaurar dependencias y compilar:
