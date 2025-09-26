@@ -1,0 +1,16 @@
+# Ignorar configuración de Visual Studio
+.vs/
+
+# Ignorar archivos de compilación y binarios
+bin/
+obj/
+
+# Ignorar archivos temporales o específicos del entorno
+*.dtbcache.json
+*.pdb
+*.exe
+*.dll
+*.cache
+
+# Ignorar archivos con datos sensibles
+ServiceLayer.config
